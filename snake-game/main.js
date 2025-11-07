@@ -441,6 +441,19 @@
   // Also allow mouse click/tap on canvas
   board.addEventListener('click', (e) => { actByTap(e.clientX, e.clientY); });
 
+  // Touch buttons (two-column layout below the board)
+  const touchButtons = document.querySelector('.touch');
+  if (touchButtons) {
+    touchButtons.addEventListener('click', (e) => {
+      if (!state.controlsEnabled) return;
+      const btn = e.target.closest('button[data-dir]');
+      if (!btn) return;
+      const val = String(btn.getAttribute('data-dir') || '').toLowerCase();
+      const mapping = { up: DIR.ArrowUp, down: DIR.ArrowDown, left: DIR.ArrowLeft, right: DIR.ArrowRight };
+      const d = mapping[val]; if (d) state.nextDir = d;
+    });
+  }
+
   // init
   state.playerName = (localStorage.getItem(NAME_KEY) || '').trim(); if (playerNameEl) playerNameEl.value = state.playerName;
   reset();

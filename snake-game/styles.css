@@ -58,10 +58,10 @@ canvas#board {
 
 .hint { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
 
-.touch { margin-top: 8px; display: none; gap: 8px; }
-.touch .row { display: flex; gap: 12px; justify-content: center; }
+.touch { margin-top: 10px; display: none; gap: 12px; }
+.touch .row { display: contents; }
 .touch button {
-  width: 64px; height: 48px; font-size: 20px; border-radius: 10px; cursor: pointer;
+  width: 100%; height: 56px; font-size: 20px; border-radius: 12px; cursor: pointer;
   background: #0f172a; color: var(--ink); border: 1px solid #1f2a44;
 }
 
@@ -80,4 +80,19 @@ canvas#board {
   .playzone { grid-template-columns: 1fr; }
   .leaderboard { order: 2; }
 }
-/* Hide legacy touch arrows on all devices; canvas tap zones are used */
+/* Show two-column touch controls on touch devices */
+@media (pointer: coarse) {
+  .touch.two-columns, .touch { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+      'up down'
+      'left right';
+    gap: 12px; 
+    width: min(92vw, 480px);
+  }
+  .touch button[data-dir="up"] { grid-area: up; }
+  .touch button[data-dir="down"] { grid-area: down; }
+  .touch button[data-dir="left"] { grid-area: left; }
+  .touch button[data-dir="right"] { grid-area: right; }
+}
