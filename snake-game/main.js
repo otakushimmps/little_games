@@ -382,6 +382,41 @@
     const dir = DIR[e.code]; if (dir) { state.nextDir = dir; e.preventDefault(); }
   });
 
+  // Mobile/touch controls: on-screen buttons
+  const touchRoot = document.querySelector('.touch');
+  if (touchRoot) {
+    touchRoot.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-dir]');
+      if (!btn || !state.controlsEnabled) return;
+      const val = String(btn.getAttribute('data-dir') || '').toLowerCase();
+      const mapping = { up: DIR.ArrowUp, down: DIR.ArrowDown, left: DIR.ArrowLeft, right: DIR.ArrowRight };
+      const d = mapping[val]; if (d) state.nextDir = d;
+    });
+  }
+
+  // Mobile swipe on canvas
+  let touchStart = null;
+  function onTouchStart(ev) {
+    const t = ev.touches ? ev.touches[0] : ev;
+    touchStart = { x: t.clientX, y: t.clientY, handled: false };
+  }
+  function onTouchMove(ev) {
+    if (!touchStart || touchStart.handled || !state.controlsEnabled) return;
+    const t = ev.touches ? ev.touches[0] : ev;
+    const dx = t.clientX - touchStart.x; const dy = t.clientY - touchStart.y;
+    const adx = Math.abs(dx), ady = Math.abs(dy);
+    const TH = 24; // px threshold
+    if (adx < TH && ady < TH) return;
+    if (adx > ady) { state.nextDir = dx > 0 ? DIR.ArrowRight : DIR.ArrowLeft; }
+    else { state.nextDir = dy > 0 ? DIR.ArrowDown : DIR.ArrowUp; }
+    touchStart.handled = true;
+    ev.preventDefault();
+  }
+  function onTouchEnd() { touchStart = null; }
+  board.addEventListener('touchstart', onTouchStart, { passive: true });
+  board.addEventListener('touchmove', onTouchMove, { passive: false });
+  board.addEventListener('touchend', onTouchEnd, { passive: true });
+
   // init
   state.playerName = (localStorage.getItem(NAME_KEY) || '').trim(); if (playerNameEl) playerNameEl.value = state.playerName;
   reset();

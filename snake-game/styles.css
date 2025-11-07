@@ -35,6 +35,8 @@ canvas#board {
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.05);
   outline: none;
+  width: min(92vw, 480px);
+  height: auto;
 }
 
 .controls { display: flex; gap: 10px; }
@@ -56,7 +58,7 @@ canvas#board {
 
 .hint { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
 
-.touch { margin-top: 8px; display: grid; gap: 8px; }
+.touch { margin-top: 8px; display: none; gap: 8px; }
 .touch .row { display: flex; gap: 12px; justify-content: center; }
 .touch button {
   width: 64px; height: 48px; font-size: 20px; border-radius: 10px; cursor: pointer;
@@ -72,3 +74,12 @@ canvas#board {
 .leaderboard .row { display: grid; grid-template-columns: 1.2fr .5fr .5fr .6fr; gap: 6px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.06); }
 .leaderboard .row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .leaderboard .row.head { color: var(--muted); font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .playzone { grid-template-columns: 1fr; }
+  .leaderboard { order: 2; }
+}
+@media (pointer: coarse) {
+  .touch { display: grid; }
+}

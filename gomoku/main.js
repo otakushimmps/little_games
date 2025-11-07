@@ -37,9 +37,12 @@
     maybeAi();
   }
 
-  function xyFromEvent(e) {
+function xyFromEvent(e) {
     const rect = boardEl.getBoundingClientRect();
-    const px = e.clientX - rect.left; const py = e.clientY - rect.top;
+    const scaleX = boardEl.width / rect.width;
+    const scaleY = boardEl.height / rect.height;
+    const pxCss = e.clientX - rect.left; const pyCss = e.clientY - rect.top;
+    const px = pxCss * scaleX; const py = pyCss * scaleY;
     const gx = Math.round((px - MARGIN) / CELL);
     const gy = Math.round((py - MARGIN) / CELL);
     return { x: gx, y: gy };

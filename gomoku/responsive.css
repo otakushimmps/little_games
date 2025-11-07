@@ -1,0 +1,3 @@
+/* Responsive overrides for mobile */
+canvas#gomokuBoard{width:min(92vw,640px);height:auto;display:block}
+@media (max-width: 900px){.gomoku{flex-direction:column}.side{min-width:unset;width:100%}}
