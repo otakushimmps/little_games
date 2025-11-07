@@ -382,16 +382,29 @@
     const dir = DIR[e.code]; if (dir) { state.nextDir = dir; e.preventDefault(); }
   });
 
-  // Mobile/touch controls: on-screen buttons
-  const touchRoot = document.querySelector('.touch');
-  if (touchRoot) {
-    touchRoot.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-dir]');
-      if (!btn || !state.controlsEnabled) return;
-      const val = String(btn.getAttribute('data-dir') || '').toLowerCase();
-      const mapping = { up: DIR.ArrowUp, down: DIR.ArrowDown, left: DIR.ArrowLeft, right: DIR.ArrowRight };
-      const d = mapping[val]; if (d) state.nextDir = d;
-    });
+  // Mobile controls: tap zones on the canvas
+  function actByTap(pxCss, pyCss) {
+    const rect = board.getBoundingClientRect();
+    const scaleX = board.width / rect.width;
+    const scaleY = board.height / rect.height;
+    const x = (pxCss - rect.left) * scaleX;
+    const y = (pyCss - rect.top) * scaleY;
+
+    const cx = board.width / 2, cy = board.height / 2;
+    const dx = x - cx, dy = y - cy;
+    const dist = Math.hypot(dx, dy);
+    const centerR = Math.min(board.width, board.height) * 0.18; // center circle ~18%
+
+    if (dist <= centerR) {
+      state.running ? pause() : start();
+      return;
+    }
+    const adx = Math.abs(dx), ady = Math.abs(dy);
+    if (adx >= ady) {
+      state.nextDir = dx > 0 ? DIR.ArrowRight : DIR.ArrowLeft;
+    } else {
+      state.nextDir = dy > 0 ? DIR.ArrowDown : DIR.ArrowUp;
+    }
   }
 
   // Mobile swipe on canvas
@@ -412,10 +425,21 @@
     touchStart.handled = true;
     ev.preventDefault();
   }
-  function onTouchEnd() { touchStart = null; }
+  function onTouchEnd(ev) {
+    // Treat as a tap if not handled as swipe
+    if (touchStart && !touchStart.handled) {
+      const t = (ev.changedTouches && ev.changedTouches[0]) ? ev.changedTouches[0] : (ev.touches ? ev.touches[0] : null);
+      const px = t ? t.clientX : touchStart.x; const py = t ? t.clientY : touchStart.y;
+      actByTap(px, py);
+    }
+    touchStart = null;
+  }
   board.addEventListener('touchstart', onTouchStart, { passive: true });
   board.addEventListener('touchmove', onTouchMove, { passive: false });
   board.addEventListener('touchend', onTouchEnd, { passive: true });
+
+  // Also allow mouse click/tap on canvas
+  board.addEventListener('click', (e) => { actByTap(e.clientX, e.clientY); });
 
   // init
   state.playerName = (localStorage.getItem(NAME_KEY) || '').trim(); if (playerNameEl) playerNameEl.value = state.playerName;

@@ -80,6 +80,4 @@ canvas#board {
   .playzone { grid-template-columns: 1fr; }
   .leaderboard { order: 2; }
 }
-@media (pointer: coarse) {
-  .touch { display: grid; }
-}
+/* Hide legacy touch arrows on all devices; canvas tap zones are used */
