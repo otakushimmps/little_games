@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
@@ -8,24 +8,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <!-- layout expects specific IDs present: score/high/speed/leaderboard -->
 </head>
 <body>
   <div class="app">
     <header class="head">
       <h1>貪食蛇 Snake</h1>
-      <nav class="nav"><a href="../arcade/index.html">← 返回遊戲列表</a></nav>
+      <nav class="nav"><a href="../arcade/index.html">← 回 Arcade</a></nav>
       <div class="stats">
-        <div>分數 <span id="score">0</span></div>
+        <div>得分 <span id="score">0</span></div>
         <div>最高 <span id="high">0</span></div>
         <div>速度 <span id="speed">1x</span></div>
       </div>
     </header>
 
     <main class="main">
+      <!-- Board -->
       <div class="playzone">
         <canvas id="board" width="480" height="480" aria-label="Game board" tabindex="0"></canvas>
-        <aside id="leaderboard" class="leaderboard" aria-label="積分榜"></aside>
       </div>
+
+      <!-- Touch controls: 下方左右兩側，上/左 與 下/右 -->
+      <div class="touch two-columns" aria-label="Touch controls">
+        <div class="col left">
+          <button data-dir="up" aria-label="Up">上</button>
+          <button data-dir="left" aria-label="Left">左</button>
+        </div>
+        <div class="col right">
+          <button data-dir="down" aria-label="Down">下</button>
+          <button data-dir="right" aria-label="Right">右</button>
+        </div>
+      </div>
+
+      <!-- Controls (名稱、模式、開始/暫停/重來) -->
       <div class="controls">
         <label class="namewrap">名稱
           <input id="playerName" class="name" placeholder="你的名字" maxlength="12" />
@@ -41,18 +56,12 @@
         <button id="pauseBtn">暫停</button>
         <button id="restartBtn">重新開始</button>
       </div>
-      <p class="hint">操作：方向鍵 / WASD，空白鍵暫停，R 重新開始。請先輸入名稱並按「開始」。</p>
 
-      <div class="touch">
-        <div class="row">
-          <button data-dir="up">↑</button>
-        </div>
-        <div class="row">
-          <button data-dir="left">←</button>
-          <button data-dir="down">↓</button>
-          <button data-dir="right">→</button>
-        </div>
-      </div>
+      <!-- Leaderboard -->
+      <aside id="leaderboard" class="leaderboard" aria-label="排行榜"></aside>
+
+      <!-- Hint -->
+      <p class="hint">操作：方向鍵 / WASD，空白鍵暫停，R 重新開始。請先輸入名稱再按「開始」。</p>
     </main>
 
     <footer class="foot">
@@ -61,5 +70,6 @@
   </div>
 
   <script src="main.js"></script>
-</body>
-</html>
+  </body>
+  </html>
+
