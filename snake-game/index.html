@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>貪食蛇 Snake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="head">
+      <h1>貪食蛇 Snake</h1>
+      <nav class="nav"><a href="../arcade/index.html">← 返回遊戲列表</a></nav>
+      <div class="stats">
+        <div>分數 <span id="score">0</span></div>
+        <div>最高 <span id="high">0</span></div>
+        <div>速度 <span id="speed">1x</span></div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="playzone">
+        <canvas id="board" width="480" height="480" aria-label="Game board" tabindex="0"></canvas>
+        <aside id="leaderboard" class="leaderboard" aria-label="積分榜"></aside>
+      </div>
+      <div class="controls">
+        <label class="namewrap">名稱
+          <input id="playerName" class="name" placeholder="你的名字" maxlength="12" />
+        </label>
+        <label class="mode" for="modeSelect">模式
+          <select id="modeSelect">
+            <option value="normal" selected>一般</option>
+            <option value="versus">對戰</option>
+            <option value="infinite">無限</option>
+          </select>
+        </label>
+        <button id="startBtn" class="primary">開始</button>
+        <button id="pauseBtn">暫停</button>
+        <button id="restartBtn">重新開始</button>
+      </div>
+      <p class="hint">操作：方向鍵 / WASD，空白鍵暫停，R 重新開始。請先輸入名稱並按「開始」。</p>
+
+      <div class="touch">
+        <div class="row">
+          <button data-dir="up">↑</button>
+        </div>
+        <div class="row">
+          <button data-dir="left">←</button>
+          <button data-dir="down">↓</button>
+          <button data-dir="right">→</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <small>Made by otakushimm - Local-only, no tracking</small>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

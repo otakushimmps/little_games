@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>五子棋 Gomoku</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="head">
+      <h1>五子棋 Gomoku</h1>
+      <nav class="nav">
+        <a href="../arcade/index.html">← 返回 Arcade</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <div class="gomoku">
+        <div class="board-wrap">
+          <canvas id="gomokuBoard" width="640" height="640" aria-label="Gomoku board" tabindex="0"></canvas>
+        </div>
+        <aside class="side">
+          <div class="status">
+            <div>回合：<span id="turn">黑子</span></div>
+            <div>結果：<span id="result">—</span></div>
+          </div>
+          <div class="controls"><button id="newGame" class="primary">新局</button><button id="undo">悔棋</button><label style="display:block;margin-top:8px;">難度 <select id="difficulty"><option value="novice">入門</option><option value="easy">簡單</option><option value="medium" selected>一般</option><option value="hard">困難</option><option value="expert">專家</option></select></label><label style="display:block;margin-top:6px;">執子 <select id="side"><option value="black" selected>黑</option><option value="white">白</option></select></label></div>
+          <div class="controls" style="margin-top:8px">
+            <div style="font-weight:600;margin-bottom:6px">回播</div>
+            <button id="replayPrev">上一步</button>
+            <button id="replayNext">下一步</button>
+            <button id="replayPlay">連續回播</button>
+            <button id="replayPause">暫停</button>
+          </div>
+          <div id="explain" style="margin-top:10px;color:#cbd5e1;font-size:13px;line-height:1.5"></div>
+          <p class="hint">規則：黑先、先連五者勝。點擊棋盤下子；支援悔棋。</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <small>Local-only, no tracking</small>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+

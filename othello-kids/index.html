@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>黑白棋探險記 · Othello Kids Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div>
+        <a href="../arcade/index.html" class="back">← 返回 Arcade</a>
+        <h1>黑白棋探險記</h1>
+        <p>給 6-10 歲孩子的策略與程式思維冒險</p>
+      </div>
+      <button id="guideBtn" class="pill">快速教學</button>
+    </header>
+
+    <main class="layout">
+      <section class="board-shell">
+        <div class="board" id="board"></div>
+        <div class="board-footer">
+          <div>黑子：<span id="blackCount">2</span></div>
+          <div>白子：<span id="whiteCount">2</span></div>
+          <div class="turn">輪到：<span id="turnLabel">黑子</span></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="card">
+          <h2>設定</h2>
+          <label>棋盤大小
+            <select id="sizeSelect">
+              <option value="8" selected>8 × 8 標準</option>
+              <option value="6">6 × 6 入門</option>
+              <option value="4">4 × 4 迷你</option>
+            </select>
+          </label>
+          <label>AI 難度
+            <select id="difficultySelect">
+              <option value="1">Lv1 新手</option>
+              <option value="2">Lv2 觀察家</option>
+              <option value="3" selected>Lv3 策略芽</option>
+              <option value="4">Lv4 進階戰術</option>
+              <option value="5">Lv5 教練級</option>
+            </select>
+          </label>
+          <label>任務卡
+            <select id="missionSelect"></select>
+          </label>
+          <div class="btn-row">
+            <button id="newGame" class="primary">開始新局</button>
+            <button id="hintBtn">提示</button>
+            <button id="undoBtn">悔棋</button>
+          </div>
+        </div>
+
+        <div class="card" id="missionCard">
+          <h2 id="missionTitle">任務介紹</h2>
+          <p id="missionDesc">選擇任務卡即可載入專屬挑戰情境。</p>
+          <ul id="missionGoals"></ul>
+        </div>
+
+        <div class="card">
+          <h2>學習助教</h2>
+          <div id="coachLog" class="coach-log">歡迎！棋盤上的亮點是可下的位置，點擊即可夾擊翻面喔。</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="guideTemplate">
+    <div class="modal" role="dialog" aria-label="快速教學">
+      <div class="modal-box">
+        <button class="close" data-close>×</button>
+        <h3>3 分鐘搞懂黑白棋</h3>
+        <ol>
+          <li>夾住對手棋子即可把夾住路徑全部翻成自己的顏色。</li>
+          <li>可下點會用「小亮點」提醒，沒有可下點時自動 PASS。</li>
+          <li>善用角落、邊線，不容易被反翻；任務卡會給你不同挑戰。</li>
+        </ol>
+        <p>試著完成任務，再挑戰更聰明的 AI！</p>
+      </div>
+    </div>
+  </template>
+
+  <!-- 使用一般 script + defer，避免在 file:// 下被 CORS 擋掉 (module 會被擋) -->
+  <script src="main.js" defer></script>
+</body>
+</html>

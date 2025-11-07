@@ -1,0 +1,47 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arcade 小遊戲集合</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Apple Color Emoji','Segoe UI Emoji';background:radial-gradient(1200px 800px at 20% 10%,#0e1724, #0a0f17 35%, #070b11 60%, #05080c 100%);color:#e5e7eb}
+    .app{max-width:1000px;margin:0 auto;padding:24px}
+    h1{margin:0 0 16px;font-weight:800;font-size:24px;color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .card{border:1px solid #334155;background:rgba(15,23,42,.6);border-radius:12px;padding:14px}
+    .card h3{margin:0 0 6px;color:#fff}
+    .card p{margin:0 0 10px;color:#94a3b8;font-size:14px;min-height:42px}
+    .card a{display:inline-block;background:#22c55e;color:#062310;text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid #16a34a;font-weight:600}
+    .foot{margin-top:16px;color:#94a3b8;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Arcade 小遊戲</h1>
+      <div class="grid">
+      <div class="card">
+        <h3>貪食蛇</h3>
+        <p>大地圖、AI、積分榜等進階玩法。點擊進入新分頁。</p>
+        <a href="../snake-game/index.html">開啟</a>
+      </div>
+      <div class="card">
+        <h3>五子棋</h3>
+        <p>15x15 雙人對戰，黑先；支援悔棋與勝利線標示。</p>
+        <a href="../gomoku/index.html">開啟</a>
+      </div>
+      <div class="card">
+        <h3>黑白棋探險記</h3>
+        <p>入門到進階的 Othello，任務卡與助教提示。</p>
+        <a href="../othello-kids/index.html">開啟</a>
+      </div>
+    </div>
+    <div class="foot">
+      <small>Local-only, no tracking</small>
+    </div>
+  </div>
+</body>
+</html>
