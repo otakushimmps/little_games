@@ -77,8 +77,21 @@ canvas#board {
 
 /* Responsive tweaks */
 @media (max-width: 900px) {
-  .playzone { grid-template-columns: 1fr; }
-  .leaderboard { order: 2; }
+  .main {
+    grid-template-areas:
+      'board'
+      'touch'
+      'controls'
+      'leader'
+      'hint';
+  }
+  /* Flatten playzone so its children are placed in main grid */
+  .playzone { display: contents; }
+  canvas#board { grid-area: board; justify-self: center; }
+  .touch { grid-area: touch; display: grid; width: min(92vw, 480px); }
+  .controls { grid-area: controls; }
+  .leaderboard { grid-area: leader; }
+  .hint { grid-area: hint; }
 }
 /* Show two-column touch controls on touch devices */
 @media (pointer: coarse) {
