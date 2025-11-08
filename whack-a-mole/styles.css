@@ -1,0 +1,26 @@
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Apple Color Emoji','Segoe UI Emoji';background:radial-gradient(1200px 800px at 20% 10%,#0e1724, #0a0f17 35%, #070b11 60%, #05080c 100%);color:#e5e7eb}
+.app{max-width:960px;margin:0 auto;padding:16px}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top h1{margin:0 8px 0 0;font-size:22px;font-weight:800;color:#fff}
+.back{color:#93c5fd;text-decoration:none;border:1px solid #1d4ed8;padding:4px 8px;border-radius:8px;background:rgba(29,78,216,.15)}
+.hud{margin-left:auto;display:flex;gap:12px;color:#cbd5e1;font-weight:600}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}
+button{padding:8px 12px;border-radius:8px;border:1px solid #334155;background:#0b1220;color:#e5e7eb;cursor:pointer}
+button.primary{background:#22c55e;border-color:#16a34a;color:#062310;font-weight:700}
+select{padding:6px 8px;border-radius:8px;border:1px solid #334155;background:#0b1220;color:#e5e7eb}
+
+.board{--cols:3; --rows:3; display:grid; grid-template-columns:repeat(var(--cols),1fr); gap:12px; max-width:720px; margin:0 auto}
+.hole{position:relative; aspect-ratio:1/1; border-radius:12px; overflow:hidden; background:linear-gradient(#0f172a,#0b1220); border:1px solid #334155; box-shadow:inset 0 -8px 0 rgba(0,0,0,.3)}
+.pit{position:absolute; left:50%; bottom:8px; transform:translateX(-50%); width:70%; height:18%; background:radial-gradient(60% 110% at 50% 100%, #0b1220, #020617); border-radius:50%}
+.mole,.friend{position:absolute; left:50%; bottom:-70%; transform:translateX(-50%); width:68%; height:68%; border-radius:50%; transition:bottom .12s ease-out; display:flex; align-items:center; justify-content:center}
+.mole[hidden], .friend[hidden]{ display:none !important }
+.mole{background:radial-gradient(circle at 50% 35%, #fde68a, #fbbf24 60%, #a16207); border:4px solid #92400e}
+.friend{background:radial-gradient(circle at 50% 35%, #bae6fd, #60a5fa 65%, #1d4ed8); border:4px solid #1d4ed8}
+.emoji{font-size:clamp(28px, 8vw, 56px); filter:drop-shadow(0 2px 0 rgba(0,0,0,.45))}
+.up .mole,.up .friend{bottom:18%}
+.label{position:absolute; top:6px; left:8px; font-size:12px; color:#94a3b8}
+.foot{margin-top:16px;color:#94a3b8;font-size:12px;text-align:center}
+
+/* 尺寸由 JS 依選項與裝置方向決定 */

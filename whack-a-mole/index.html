@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>打地鼠｜Whack-a-Mole</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <a class="back" href="../arcade/index.html">← 返回 Arcade</a>
+      <h1>打地鼠</h1>
+      <div class="hud">
+        <div>時間：<span id="time">60</span>s</div>
+        <div>分數：<span id="score">0</span></div>
+        <div>命中：<span id="hits">0</span>／<span id="shots">0</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls">
+        <button id="startBtn" class="primary">開始</button>
+        <button id="pauseBtn">暫停</button>
+        <label>棋盤
+          <select id="boardSize">
+            <option value="3x3" selected>3 × 3</option>
+            <option value="4x3">4 × 3（直立變 3×4）</option>
+            <option value="4x4">4 × 4</option>
+          </select>
+        </label>
+        <label>難度
+          <select id="difficulty">
+            <option value="easy">容易</option>
+            <option value="normal" selected>普通</option>
+            <option value="hard">困難</option>
+          </select>
+        </label>
+        <label>時長
+          <select id="duration">
+            <option value="45">45s</option>
+            <option value="60" selected>60s</option>
+            <option value="90">90s</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="board" id="board" aria-label="遊戲區" role="application"></section>
+    </main>
+
+    <footer class="foot">
+      <small>純前端，無追蹤。點擊（或觸控）出現的地鼠；小雞請不要打。</small>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
