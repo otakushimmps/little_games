@@ -11,7 +11,7 @@
     <header class="header">
       <div>
         <h1>彈珠台</h1>
-        <p>方向鍵或 A/D 操作左右擋板，空白鍵發射 / 重開。</p>
+        <p>手機可點左右擋板與發射鍵；鍵盤支援方向鍵或 A/D 操作。</p>
       </div>
       <div class="scoreboard">
         <div>
@@ -27,10 +27,15 @@
     </header>
     <section class="board">
       <canvas id="table" width="480" height="720" aria-label="彈珠台" role="img"></canvas>
+      <div class="touch-controls" aria-hidden="true">
+        <button class="touch-button left" type="button">左擋板</button>
+        <button class="touch-button launch" type="button">發射</button>
+        <button class="touch-button right" type="button">右擋板</button>
+      </div>
       <div id="overlay" class="overlay">
         <div class="panel">
           <h2>準備好了嗎？</h2>
-          <p>按下空白鍵發射彈珠。</p>
+          <p>按下空白鍵或點發射鍵開始。</p>
         </div>
       </div>
     </section>

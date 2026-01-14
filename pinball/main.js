@@ -3,6 +3,9 @@ const scoreEl = document.getElementById("score");
 const livesEl = document.getElementById("lives");
 const overlay = document.getElementById("overlay");
 const restartButton = document.getElementById("restart");
+const touchLeft = document.querySelector(".touch-button.left");
+const touchRight = document.querySelector(".touch-button.right");
+const touchLaunch = document.querySelector(".touch-button.launch");
 const ctx = canvas.getContext("2d");
 
 const state = {
@@ -120,6 +123,35 @@ function handleKeyDown(event) {
   }
 }
 
+function setKeyState(key, pressed) {
+  if (key in keys) {
+    keys[key] = pressed;
+  }
+}
+
+function handleTouchStart(key) {
+  return (event) => {
+    event.preventDefault();
+    if (key === "launch") {
+      if (!state.running) {
+        restartGame();
+      } else {
+        launchBall();
+      }
+      return;
+    }
+    setKeyState(key, true);
+  };
+}
+
+function handleTouchEnd(key) {
+  return (event) => {
+    event.preventDefault();
+    if (key === "launch") return;
+    setKeyState(key, false);
+  };
+}
+
 function handleKeyUp(event) {
   if (event.code === "ArrowLeft" || event.code === "KeyA") keys.left = false;
   if (event.code === "ArrowRight" || event.code === "KeyD") keys.right = false;
@@ -221,7 +253,7 @@ function updateBall(dt) {
       state.running = false;
       setOverlay(true);
       overlayTitle.textContent = "遊戲結束";
-      overlayHint.textContent = "按下空白鍵重新開始。";
+      overlayHint.textContent = "按下空白鍵或點發射鍵重新開始。";
     }
     state.launched = false;
     ball.reset();
@@ -298,6 +330,15 @@ window.addEventListener("keydown", handleKeyDown);
 window.addEventListener("keyup", handleKeyUp);
 window.addEventListener("resize", handleResize);
 restartButton.addEventListener("click", restartGame);
+touchLeft?.addEventListener("pointerdown", handleTouchStart("left"));
+touchLeft?.addEventListener("pointerup", handleTouchEnd("left"));
+touchLeft?.addEventListener("pointerleave", handleTouchEnd("left"));
+touchLeft?.addEventListener("pointercancel", handleTouchEnd("left"));
+touchRight?.addEventListener("pointerdown", handleTouchStart("right"));
+touchRight?.addEventListener("pointerup", handleTouchEnd("right"));
+touchRight?.addEventListener("pointerleave", handleTouchEnd("right"));
+touchRight?.addEventListener("pointercancel", handleTouchEnd("right"));
+touchLaunch?.addEventListener("pointerdown", handleTouchStart("launch"));
 
 handleResize();
 updateScore();
