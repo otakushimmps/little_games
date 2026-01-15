@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>彈珠台</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <h1>彈珠台</h1>
+        <p>手機可點左右擋板與發射鍵；鍵盤支援方向鍵或 A/D 操作。</p>
+      </div>
+      <div class="scoreboard">
+        <div>
+          <span class="label">分數</span>
+          <span id="score" class="value">0</span>
+        </div>
+        <div>
+          <span class="label">剩餘</span>
+          <span id="lives" class="value">3</span>
+        </div>
+        <button id="restart" type="button">重新開始</button>
+      </div>
+    </header>
+    <section class="board">
+      <canvas id="table" width="480" height="720" aria-label="彈珠台" role="img"></canvas>
+      <div class="touch-controls" aria-hidden="true">
+        <button class="touch-button left" type="button">左擋板</button>
+        <button class="touch-button launch" type="button">發射</button>
+        <button class="touch-button right" type="button">右擋板</button>
+      </div>
+      <div id="overlay" class="overlay">
+        <div class="panel">
+          <h2>準備好了嗎？</h2>
+          <p>按下空白鍵或點發射鍵開始。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
