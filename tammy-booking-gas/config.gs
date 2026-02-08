@@ -18,6 +18,8 @@ function getConfig() {
     geminiApiKey: props.getProperty('GEMINI_API_KEY') || '',
     geminiModel: props.getProperty('GEMINI_MODEL') || 'gemini-1.5-flash',
     calendarId: props.getProperty('BOOKING_CALENDAR_ID') || '',
+    bookingSpreadsheetId: props.getProperty('BOOKING_SPREADSHEET_ID') || '',
+    bookingSheetName: props.getProperty('BOOKING_SHEET_NAME') || 'bookings',
     timezone: props.getProperty('TIMEZONE') || DEFAULT_CONFIG.timezone,
     bookingDurationMinutes: Number(props.getProperty('BOOKING_DURATION_MINUTES') || DEFAULT_CONFIG.bookingDurationMinutes),
     alternativeDays: Number(props.getProperty('ALTERNATIVE_DAYS') || DEFAULT_CONFIG.alternativeDays),

@@ -86,6 +86,20 @@ function createBooking(args) {
     description: description,
   });
 
+  upsertBookingSheetRecord({
+    bookingId: event.getId(),
+    status: 'booked',
+    customerName: args.name,
+    lineUserId: args.lineUserId,
+    serviceType: args.serviceType,
+    isPregnant: !!args.isPregnant,
+    gestationalWeek: args.gestationalWeek || '',
+    date: Utilities.formatDate(start, cfg.timezone, 'yyyy-MM-dd'),
+    startTime: Utilities.formatDate(start, cfg.timezone, 'HH:mm'),
+    endTime: Utilities.formatDate(end, cfg.timezone, 'HH:mm'),
+    notes: args.notes || '',
+  });
+
   return {
     success: true,
     bookingId: event.getId(),
@@ -115,6 +129,13 @@ function rescheduleBooking(args) {
   const start = parseDateTime(args.newDate, args.newStartTime);
   const end = addMinutes(start, cfg.bookingDurationMinutes);
   event.setTime(start, end);
+  upsertBookingSheetRecord({
+    bookingId: event.getId(),
+    status: 'rescheduled',
+    date: Utilities.formatDate(start, cfg.timezone, 'yyyy-MM-dd'),
+    startTime: Utilities.formatDate(start, cfg.timezone, 'HH:mm'),
+    endTime: Utilities.formatDate(end, cfg.timezone, 'HH:mm'),
+  });
   return {
     success: true,
     bookingId: event.getId(),
@@ -129,6 +150,7 @@ function cancelBooking(args) {
     return { success: false, reason: 'booking_not_found' };
   }
   event.deleteEvent();
+  markBookingSheetCancelled(args.bookingId, args.reason || '');
   return { success: true, bookingId: args.bookingId, reason: args.reason || '' };
 }
 

@@ -13,6 +13,7 @@
 - `line.gs`：LINE 回覆與使用者資料讀取
 - `gemini.gs`：Gemini 呼叫、工具宣告、工具分派
 - `calendar.gs`：行事曆查詢 / 建立 / 改期 / 取消
+- `sheet.gs`：Google 試算表同步（建立/改期/取消）
 - `appsscript.json`：GAS 專案設定
 
 ## 1) Script Properties 必填
@@ -23,6 +24,8 @@
 - `GEMINI_API_KEY`
 - `GEMINI_MODEL`（預設 `gemini-1.5-flash`）
 - `BOOKING_CALENDAR_ID`
+- `BOOKING_SPREADSHEET_ID`（要同步紀錄時必填）
+- `BOOKING_SHEET_NAME`（預設 `bookings`）
 - `TIMEZONE`（預設 `Asia/Taipei`）
 - `BOOKING_DURATION_MINUTES`（預設 `60`）
 - `ALTERNATIVE_DAYS`（預設 `2`）
@@ -43,6 +46,7 @@
 - 改期 / 取消
 - 預約成功固定重複確認：姓名、日期、時段
 - 孕媽咪依孕週給予衛教建議
+- 預約資料同步寫入 Google 試算表（若有設定 `BOOKING_SPREADSHEET_ID`）
 
 ## 4) 注意事項（上線建議）
 - 若要嚴格驗證 `X-Line-Signature`，建議在 Cloud Run / Cloud Functions 增加 proxy 後轉送到 GAS。
